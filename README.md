@@ -4,14 +4,37 @@ El aw-form es un formulario para los componetes de Arisman Webs. Es una manera e
 
 Como es de esperar, los componentes de formulario Arisman Webs no se pueden tratar como componentes normales al estar en el ShadowDom del navegador. De modo que este componente te permitirá enviarlos de forma intuitiva.
 
-Incluir el componente:
+#### Instalar el componente
+
+```
+$ npm i aw_form
+```
+
+#### Incluir el componente:
 
 ```html
 <script type="module" src="/node_modules/aw_polymer_3/polymer/polymer-element.js"></script>
 <script type="module" src="/node_modules/aw_form/aw-form.js"></script>
 ```
 
-Uso del componente
+También es posible instalar todo lo necesario para manejar los formularios de `aw` instalnado:
+
+```
+$ npm i aw_form_elements_df
+```
+Esto instalará todo los campos y componentes necesarios para usar los `aw-form`.
+
+- <a href="https://www.npmjs.com/package/aw_form_elements_df" target="_blank">aw-form-elements-df</a>
+- <a href="https://www.npmjs.com/package/aw_form_elements_common" target="_blank">aw-form-elements-common</a>
+- <a href="https://www.npmjs.com/package/aw_button" target="_blank">aw-button</a>
+
+Para incluir este y todos los componentes de formularios disponibles, así como los `aw_form_elements_df`, `aw_button` y los `aw_form_elements_common`, bastará con añadir:
+
+```html
+<script src="/node_modules/aw_form_elements_df/aw-form-elements-df.js"></script>
+```
+
+#### Uso del componente
 
 ```html
 <aw-form action="/scripts/my-script.php" method="post">
@@ -39,10 +62,10 @@ Formulario simple que permite autocompletar campos y todos los campos son obliga
 
 ```html
 <aw-form action="/scripts/my_script.php" method="get">
-    <aw-input name="nombre" label="Nombre" required minlength="5"></aw-input>
-    <aw-input name="apellidos" label="Apellidos" required minlength="5"></aw-input>
-    <aw-input type="email" name="email" label="Correo electrónico" required maxlength="40" countchar></aw-input>
-    <aw-button type="submit">ENVIAR</aw-button>
+    <aw-input unresolved name="nombre" label="Nombre" required minlength="5"></aw-input>
+    <aw-input unresolved name="apellidos" label="Apellidos" required minlength="5"></aw-input>
+    <aw-input unresolved type="email" name="email" label="Correo electrónico" required maxlength="40" countchar></aw-input>
+    <aw-button unresolved type="submit">ENVIAR</aw-button>
 </aw-form>
 ```
 ___
@@ -51,10 +74,10 @@ Formulario que no permite el autocompletar y no valida los campos antes de envia
 
 ```html
 <aw-form action="/scripts/my_script.php" method="get" autocomplete="off" novalidate>
-    <aw-input name="nombre" label="Nombre" required minlength="5"></aw-input>
-    <aw-input name="apellidos" label="Apellidos" required minlength="5"></aw-input>
-    <aw-input type="email" name="email" label="Correo electrónico" required maxlength="40" countchar></aw-input>
-    <aw-button type="submit">ENVIAR</aw-button>
+    <aw-input unresolved name="nombre" label="Nombre" required minlength="5"></aw-input>
+    <aw-input unresolved name="apellidos" label="Apellidos" required minlength="5"></aw-input>
+    <aw-input unresolved type="email" name="email" label="Correo electrónico" required maxlength="40" countchar></aw-input>
+    <aw-button unresolved type="submit">ENVIAR</aw-button>
 </aw-form>
 ```
 ___
@@ -68,7 +91,7 @@ Formulario que obliga que un campo de confirmar password coincida con el del pas
     <aw-input type="email" name="email" label="Correo electrónico" required maxlength="40" countchar></aw-input>
     <aw-input type="password" name="password" label="Contraseña" required></aw-input>
     <aw-input type="password" name="confirm" label="Confirmar contraseña" required equalto="password"></aw-input>
-    <aw-button type="submit" width="100%">ENVIAR</aw-button>
+    <aw-button unresolved type="submit" width="100%">ENVIAR</aw-button>
 </aw-form>
 ```
 ___
@@ -77,10 +100,10 @@ Al validar el formulario, los campos con errores nos mostrarán mensajes por def
 
 ```html
 <aw-form action="/scripts/my_script.php" method="post" connectedfunc="setMessages">
-    <aw-input name="nombre" label="Nombre" required minlength="5"></aw-input>
-    <aw-input name="apellidos" label="Apellidos" required minlength="5"></aw-input>
-    <aw-input type="email" name="email" label="Correo electrónico" required maxlength="40" countchar></aw-input>
-    <aw-button type="submit" width="100%">ENVIAR</aw-button>
+    <aw-input unresolved name="nombre" label="Nombre" required minlength="5"></aw-input>
+    <aw-input unresolved name="apellidos" label="Apellidos" required minlength="5"></aw-input>
+    <aw-input unresolved type="email" name="email" label="Correo electrónico" required maxlength="40" countchar></aw-input>
+    <aw-button unresolved type="submit" width="100%">ENVIAR</aw-button>
 </aw-form>
 ```
 
@@ -107,10 +130,10 @@ Formulario que utiliza una función externa para tratar el formulario. Útil se 
 
 ```html
 <aw-form autocomplete="off" submitfunc="Formulario.submit">
-    <aw-input name="nombre" label="Nombre" required minlength="5"></aw-input><br>
-    <aw-input name="apellidos" label="Apellidos" required minlength="5"></aw-input><br>
-    <aw-input type="email" name="email" label="Correo electrónico" required maxlength="40" countchar></aw-input><br>
-    <aw-button type="submit" width="100%">Enviar</aw-button>
+    <aw-input unresolved name="nombre" label="Nombre" required minlength="5"></aw-input><br>
+    <aw-input unresolved name="apellidos" label="Apellidos" required minlength="5"></aw-input><br>
+    <aw-input unresolved type="email" name="email" label="Correo electrónico" required maxlength="40" countchar></aw-input><br>
+    <aw-button unresolved type="submit" width="100%">Enviar</aw-button>
 </aw-form>
 <div id="output"></div>
 ```
@@ -142,6 +165,6 @@ En el ejemplo anterior pasamos el formulario por el método `submit()` de la cla
 ______________________________
 
 <p style="text-align: center; padding: 50px 0">
-    <b>Contacto</b><br><br>Manu J. Overa<br><a href="mailto:manu.overa@arismanwebs.es">manu.overa@arismanwebs.es</a><br><br>
-    Diseño Web - <a href="https://arismanwebs.es">Arisman Webs</a>
+    <b>Contacto</b><br><br>Manu J. Overa<br><a href="mailto:manu.giralda@gmail.com">manu.giralda@gmail.com</a><br><br>
+    <!-- Diseño Web - <a href="https://arismanwebs.es">Arisman Webs</a> -->
 </p>

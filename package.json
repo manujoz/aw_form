@@ -1,0 +1,19 @@
+{
+	"name": "aw_form",
+	"version": "2.0.2",
+	"description": "Formulario para componentes Arisman Webs",
+	"keywords": [
+	  	"Arisman Webs"
+	],
+	"author": "Arisman Webs",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/manujoz/aw_form"
+	},
+	"dependencies": {
+		"aw_extern_functions": "^2.0.0",
+		"aw_form_mixins": "^2.0.0",
+		"aw_polymer_3": "^1.1.0"
+	},
+	"license": "ISC"
+}
