@@ -3,6 +3,11 @@ import { PolymerElement, html } 		from "../aw_polymer_3/polymer/polymer-element.
 import { AwFormValidateMixin } 			from '../aw_form_mixins/aw-form-validate-mixin.js';
 import { AwExternsFunctionsMixin } 		from '../aw_extern_functions/aw-extern-functions-mixin.js';
 
+/**
+ * Componente de formulario
+ * 
+ * @attr {String} submitfunc
+ */
 class AwForm extends AwFormValidateMixin( AwExternsFunctionsMixin ( PolymerElement )) {
 	static get template() {
 		return html`
@@ -22,7 +27,7 @@ class AwForm extends AwFormValidateMixin( AwExternsFunctionsMixin ( PolymerEleme
                 method$="[[method]]"
                 enctype$="[[enctype]]"
                 autocomplete$="[[autocomplete]]"
-                accept-charset$="[[accept-charset]]"
+                accept-charset$="[[acceptCharset]]"
                 target$="[[target]]"
 				novalidate
                 ><button type="submit"></button></form>
@@ -32,27 +37,26 @@ class AwForm extends AwFormValidateMixin( AwExternsFunctionsMixin ( PolymerEleme
 	
 	static get properties() {
 		return {
-			// Objeto del formulario
-
-			formulario: Object,
-
 			// Propiedades del formulario
 
+			/** Id del formulario */
 			id: { type: String },
+			/** Action del formulario */
 			action: { type: String },
+			/** Método del formulario */
 			method: { type: String },
+			/** Codificacion del formulario */
 			enctype: { type: String },
+			/** Indica si debe autocompletarse */
 			autocomplete: { type: String },
-			'accept-charset': { type: String },
+			/** Caracteres aceptados */
+			acceptCharset: { type: String },
+			/** Objetivo del formulario */
 			target: { type: String },
-			novalidate: { type: Boolean, value: false },
+			/** El formulario no será validad */
+			novalidate: { type: Boolean },
+			/** El formulario se limpiará al ser enviado */
 			clearOnSubmit: { type: Boolean },
-
-			// Variables de funcionamiento
-
-			tested: { type: Boolean, value: false },
-			ghostform: { type: Boolean, value: false },
-			response: { type: Object }
 		}
 	}
 	
@@ -63,16 +67,30 @@ class AwForm extends AwFormValidateMixin( AwExternsFunctionsMixin ( PolymerEleme
 	 */
 	constructor() {
 		super();
+
+		this.id = undefined;
+		this.action = undefined;
+		this.method = undefined;
+		this.enctype = undefined;
+		this.autocomplete = "off";
+		this.acceptCharset = undefined;
+		this.target = undefined;
+		this.novalidate = false;
+		this.clearOnSubmit = false;
 			
 		// Definimos en el connectedCallback las propiedades de elementos y valores iniciales
 		// si lo hiciéramos en las propiedades del elemento personalizado no funcionaría correctamente el 
 		// registro de los elementos que estén dentro
 
+		/** @type {HTMLFormElement} */
+		this.formulario = undefined;
 		/** @type {HTMLInputElement[]} */
 		this.elements = [];
 		this.elementsInitValue = [];
 		this.buttonSubmit = null;
-		this.clearOnSubmit = false;
+		this.ghostform = false;
+		/** @type {AwFormResponse} */
+		this.response = undefined;
 
 		this.functions = {
 			register_element: ( ev ) => this._register_element( ev ),
